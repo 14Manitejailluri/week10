@@ -1,0 +1,46 @@
+counter_widget.dart
+import 'package:flutter/material.dart';
+class CounterLogic {
+int _count = 0;
+int get count => _count;
+void increment() {
+_count++;
+}
+void decrement() {
+_count--;
+}
+}
+void main() => runApp(const CounterWidget());
+class CounterWidget extends StatefulWidget {
+const CounterWidget({super.key});
+@override
+State<CounterWidget> createState() => _CounterWidgetState();
+}
+class _CounterWidgetState extends State<CounterWidget> {
+final CounterLogic _logic = CounterLogic();
+void _onPressed() {
+setState(() {
+_logic.increment();
+});
+}
+void _onPresseddec() {
+setState(() {
+_logic.decrement();
+});
+}
+@override
+Widget build(BuildContext context) {
+return Column(
+mainAxisAlignment: MainAxisAlignment.center,
+children: [
+Text('Count: ${_logic.count}', key: const Key('counter_text')),
+ElevatedButton(
+key: const Key('increment_button'),
+onPressed: _onPressed,
+child: const Text('Increment'),
+),
+ElevatedButton(
+key: const Key('decrement_button'),
+onPressed: _onPresseddec,
+child: const Text('Decrement'),
+),
